@@ -24,7 +24,7 @@
 .prog-stat-label { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-top: 4px; }
 .prog-stat-sub { font-size: 11px; color: var(--text-muted); }
 
-.progress-grid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; margin-bottom: 20px; }
+.prog-stat-card.purple { border-left-color: #7c3aed; }
 .progress-col-main, .progress-col-side { display: flex; flex-direction: column; gap: 20px; }
 
 .progress-motivation {
@@ -44,3 +44,5 @@
   .progress-grid { grid-template-columns: 1fr; }
   .progress-summary { flex-direction: column; }
 }
+
+.progress-grid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; margin-bottom: 20px; }

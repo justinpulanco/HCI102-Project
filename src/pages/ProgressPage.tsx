@@ -4,6 +4,9 @@ import MentorsChart from '../components/MentorsChart'
 import HeatmapCard from '../components/HeatmapCard'
 import WeeklyFocusCard from '../components/WeeklyFocusCard'
 import StreakGoalsCard from '../components/StreakGoalsCard'
+import BestHoursChart from '../components/BestHoursChart'
+import PersonalRecordsCard from '../components/PersonalRecordsCard'
+import WeeklyReportCard from '../components/WeeklyReportCard'
 import './ProgressPage.css'
 
 export default function ProgressPage() {
@@ -30,7 +33,7 @@ export default function ProgressPage() {
           <div className="prog-stat-icon">✅</div>
           <div>
             <div className="prog-stat-num">{weekTasks}</div>
-            <div className="prog-stat-label">Total Tasks Completed</div>
+            <div className="prog-stat-label">Tasks Completed</div>
             <div className="prog-stat-sub">This Week</div>
           </div>
         </div>
@@ -42,14 +45,25 @@ export default function ProgressPage() {
             <div className="prog-stat-sub">This Week</div>
           </div>
         </div>
+        <div className="prog-stat-card purple">
+          <div className="prog-stat-icon">🍅</div>
+          <div>
+            <div className="prog-stat-num">{logs.filter(l => l.date >= weekStr).length}</div>
+            <div className="prog-stat-label">Pomodoros</div>
+            <div className="prog-stat-sub">This Week</div>
+          </div>
+        </div>
       </div>
 
       <div className="progress-grid">
         <div className="progress-col-main">
           <MentorsChart />
+          <BestHoursChart />
           <HeatmapCard />
         </div>
         <div className="progress-col-side">
+          <WeeklyReportCard />
+          <PersonalRecordsCard />
           <WeeklyFocusCard />
           <StreakGoalsCard />
         </div>

@@ -1,0 +1,4 @@
+.best-hours-card { background: var(--card-bg); border-radius: 16px; padding: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.05); transition: background 0.3s; }
+.best-hour-badge { font-size: 11px; background: #ede9fe; color: #7c3aed; padding: 3px 10px; border-radius: 99px; font-weight: 600; }
+.empty-state-chart { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 24px 0; color: var(--text-muted); font-size: 13px; }
+.empty-state-chart span { font-size: 28px; }

@@ -1,0 +1,6 @@
+.records-card { background: var(--card-bg); border-radius: 16px; padding: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.05); transition: background 0.3s; }
+.records-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.record-item { display: flex; align-items: center; gap: 10px; background: var(--filter-bg); border-radius: 10px; padding: 12px; }
+.record-icon { font-size: 22px; flex-shrink: 0; }
+.record-value { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.record-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }

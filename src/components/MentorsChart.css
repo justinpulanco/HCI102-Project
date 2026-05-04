@@ -49,3 +49,19 @@
 .metric-tab.active { background: #7c3aed; color: #fff; font-weight: 600; }
 
 .chart-goal-note { font-size: 10px; color: var(--text-muted); margin: 6px 0 0; text-align: right; }
+
+.chart-month-summary {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--filter-bg);
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+.chart-summary-item { display: flex; flex-direction: column; gap: 2px; }
+.chart-summary-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+.chart-summary-value { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.chart-summary-delta { font-size: 13px; font-weight: 600; }
+.chart-summary-delta.up { color: #10b981; }
+.chart-summary-delta.down { color: #ef4444; }

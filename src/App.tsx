@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import { useDarkMode } from './hooks/useDarkMode'
+import { useToast } from './hooks/useToast'
+import ToastContainer from './components/ToastContainer'
+import OnboardingModal from './components/OnboardingModal'
 
 // Pages
 import LoginPage from './pages/LoginPage'
@@ -24,12 +27,16 @@ import StreakGoalsCard from './components/StreakGoalsCard'
 import SessionHistoryCard from './components/SessionHistoryCard'
 import QuickNotesCard from './components/QuickNotesCard'
 import HeatmapCard from './components/HeatmapCard'
+import SummaryBanner from './components/SummaryBanner'
 
 import './App.css'
 
-function Dashboard({ search }: { search: string }) {
+function Dashboard({ search, onToast: _onToast }: { search: string; onToast: (msg: string) => void }) {
   return (
     <div className="dashboard-grid">
+      <div className="col-full">
+        <SummaryBanner />
+      </div>
       <div className="col-left">
         <TaskTodayCard search={search} />
         <MentorsChart />
@@ -57,16 +64,18 @@ function Dashboard({ search }: { search: string }) {
 function AppLayout() {
   const { dark, toggle: toggleDark } = useDarkMode()
   const [search, setSearch] = useState('')
+  const { toasts, show: showToast, dismiss } = useToast()
 
   return (
     <div className="app-layout">
+      <OnboardingModal />
       <Sidebar />
       <div className="main-content">
         <Header search={search} onSearch={setSearch} dark={dark} onToggleDark={toggleDark} />
         <div className="page-content">
           <Routes>
-            <Route path="/dashboard" element={<Dashboard search={search} />} />
-            <Route path="/tasks" element={<TasksPage />} />
+            <Route path="/dashboard" element={<Dashboard search={search} onToast={showToast} />} />
+            <Route path="/tasks" element={<TasksPage search={search} onToast={showToast} />} />
             <Route path="/focus" element={<FocusTimerPage />} />
             <Route path="/progress" element={<ProgressPage />} />
             <Route path="/settings" element={<SettingsPage dark={dark} onToggleDark={toggleDark} />} />
@@ -74,6 +83,7 @@ function AppLayout() {
           </Routes>
         </div>
       </div>
+      <ToastContainer toasts={toasts} onDismiss={dismiss} />
     </div>
   )
 }

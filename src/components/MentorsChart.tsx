@@ -36,6 +36,8 @@ export default function MentorsChart() {
   const data = dataMap[metric]
   const goal = metric === 'hours' ? 20 : metric === 'tasks' ? 75 : 12
 
+  const selectedData = data.find(d => d.month === selected)
+
   return (
     <div className="chart-card">
       <div className="chart-header">
@@ -61,7 +63,7 @@ export default function MentorsChart() {
           <Tooltip
             cursor={{ fill: 'rgba(124,58,237,0.05)' }}
             contentStyle={{ borderRadius: 8, border: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', fontSize: 12 }}
-          formatter={(val, _, props) => [
+            formatter={(val, _, props) => [
               `${val ?? 0} (prev: ${(props.payload as { prev?: number } | undefined)?.prev ?? '-'})`, metric
             ]}
           />
@@ -73,6 +75,27 @@ export default function MentorsChart() {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
+
+      {selectedData && (
+        <div className="chart-month-summary">
+          <div className="chart-summary-item">
+            <span className="chart-summary-label">{selected} — {metric}</span>
+            <span className="chart-summary-value">{selectedData.value}</span>
+          </div>
+          <div className="chart-summary-item">
+            <span className="chart-summary-label">vs prev month</span>
+            <span className={`chart-summary-delta ${selectedData.value >= selectedData.prev ? 'up' : 'down'}`}>
+              {selectedData.value >= selectedData.prev ? '▲' : '▼'} {Math.abs(selectedData.value - selectedData.prev)}
+            </span>
+          </div>
+          <div className="chart-summary-item">
+            <span className="chart-summary-label">vs goal ({goal})</span>
+            <span className={`chart-summary-delta ${selectedData.value >= goal ? 'up' : 'down'}`}>
+              {selectedData.value >= goal ? '✓ Met' : `${goal - selectedData.value} short`}
+            </span>
+          </div>
+        </div>
+      )}
       <p className="chart-goal-note">Dashed line = goal ({goal} {metric})</p>
     </div>
   )

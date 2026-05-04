@@ -181,3 +181,46 @@
   .login-left { display: none; }
   .login-right { width: 100%; }
 }
+
+/* Forgot password modal */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 300;
+  backdrop-filter: blur(2px);
+}
+
+.forgot-modal {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  width: 340px;
+  max-width: 95vw;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: modal-in 0.2s ease;
+}
+@keyframes modal-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.forgot-modal h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); margin: 0 0 6px; }
+.forgot-sub { font-size: 13px; color: var(--text-muted); margin: 0 0 20px; }
+
+.forgot-modal-close {
+  position: absolute; top: 14px; right: 14px;
+  background: none; border: none; font-size: 16px;
+  cursor: pointer; color: var(--text-muted); padding: 4px;
+}
+
+.forgot-form { display: flex; flex-direction: column; gap: 14px; }
+
+.forgot-success {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 10px; text-align: center; padding: 8px 0;
+}
+.forgot-success-icon { font-size: 40px; }
+.forgot-success h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); margin: 0; }
+.forgot-success p { font-size: 13px; color: var(--text-muted); margin: 0 0 8px; }

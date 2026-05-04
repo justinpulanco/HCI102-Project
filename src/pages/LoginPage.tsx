@@ -8,10 +8,18 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [remember, setRemember] = useState(false)
+  const [forgotOpen, setForgotOpen] = useState(false)
+  const [forgotEmail, setForgotEmail] = useState('')
+  const [forgotSent, setForgotSent] = useState(false)
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     navigate('/dashboard')
+  }
+
+  const handleForgot = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (forgotEmail.trim()) setForgotSent(true)
   }
 
   return (
@@ -80,7 +88,9 @@ export default function LoginPage() {
                 <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} />
                 Remember me
               </label>
-              <button type="button" className="forgot-link">Forgot Password?</button>
+              <button type="button" className="forgot-link" onClick={() => { setForgotOpen(true); setForgotSent(false); setForgotEmail('') }}>
+                Forgot Password?
+              </button>
             </div>
 
             <button type="submit" className="login-btn">Login</button>
@@ -96,6 +106,38 @@ export default function LoginPage() {
           </button>
         </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {forgotOpen && (
+        <div className="modal-overlay" onClick={() => setForgotOpen(false)}>
+          <div className="forgot-modal" onClick={e => e.stopPropagation()}>
+            <button className="forgot-modal-close" onClick={() => setForgotOpen(false)}>✕</button>
+            {forgotSent ? (
+              <div className="forgot-success">
+                <span className="forgot-success-icon">✉️</span>
+                <h3>Check your email</h3>
+                <p>We sent a reset link to <strong>{forgotEmail}</strong></p>
+                <button className="login-btn" onClick={() => setForgotOpen(false)}>Back to Login</button>
+              </div>
+            ) : (
+              <>
+                <h3>Reset Password</h3>
+                <p className="forgot-sub">Enter your email and we'll send you a reset link.</p>
+                <form onSubmit={handleForgot} className="forgot-form">
+                  <div className="login-field">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <input type="email" placeholder="Enter your email" value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} required />
+                  </div>
+                  <button type="submit" className="login-btn">Send Reset Link</button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

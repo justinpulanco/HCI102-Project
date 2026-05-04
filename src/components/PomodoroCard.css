@@ -137,3 +137,64 @@
   transition: background 0.2s;
 }
 .pomo-reset:hover { background: rgba(255,255,255,0.3); }
+
+.pomo-banner {
+  width: 100%;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  animation: toast-in 0.3s ease;
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pomo-top-right { display: flex; align-items: center; gap: 8px; }
+
+.pomo-focus-btn {
+  background: rgba(255,255,255,0.15);
+  border: none; border-radius: 6px;
+  color: #fff; font-size: 14px;
+  width: 26px; height: 26px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.pomo-focus-btn:hover, .pomo-focus-btn.active { background: rgba(255,255,255,0.3); }
+
+.focus-mode-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 40;
+  backdrop-filter: blur(4px);
+}
+
+.pomodoro-card.focus-mode-active {
+  position: relative;
+  z-index: 50;
+}
+
+.pomo-settings-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.pomo-sound-select {
+  background: rgba(255,255,255,0.15);
+  border: none; border-radius: 8px;
+  color: #fff; font-size: 11px;
+  padding: 4px 8px; cursor: pointer; outline: none; flex: 1;
+}
+.pomo-sound-select option { color: #1a1a2e; background: #fff; }
+
+.pomo-autostart-label {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: rgba(255,255,255,0.85);
+  cursor: pointer; white-space: nowrap;
+}
+.pomo-autostart-label input { accent-color: #fff; cursor: pointer; }

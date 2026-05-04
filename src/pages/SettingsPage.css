@@ -55,3 +55,44 @@
   cursor: pointer;
 }
 .settings-edit-btn:hover { background: #ede9fe; color: #7c3aed; }
+
+.settings-title-row { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.settings-title-row h1 { margin: 0; font-size: 22px; font-weight: 700; color: var(--text-primary); }
+.settings-saved { font-size: 12px; color: #10b981; font-weight: 600; background: #d1fae5; padding: 3px 10px; border-radius: 99px; }
+
+.settings-section-note { font-size: 11px; color: var(--text-muted); margin: -8px 0 12px; }
+
+.profile-edit-form { display: flex; flex-direction: column; gap: 12px; padding: 4px 0; }
+.profile-edit-field { display: flex; flex-direction: column; gap: 4px; }
+.profile-edit-field label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+.profile-edit-field input {
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 12px; font-size: 13px;
+  background: var(--input-bg); color: var(--text-primary); outline: none;
+  transition: border-color 0.2s;
+}
+.profile-edit-field input:focus { border-color: #7c3aed; }
+.profile-edit-actions { display: flex; gap: 8px; }
+
+.save-btn { background: #7c3aed; color: #fff; border: none; border-radius: 8px; padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.save-btn:hover { background: #6d28d9; }
+.cancel-btn { background: var(--filter-bg); color: var(--text-secondary); border: none; border-radius: 8px; padding: 7px 16px; font-size: 13px; cursor: pointer; }
+.cancel-btn:hover { background: var(--border); }
+
+.pomo-input-row { display: flex; align-items: center; gap: 6px; }
+.pomo-step-btn {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: var(--filter-bg); border: none; cursor: pointer;
+  font-size: 16px; color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.pomo-step-btn:hover { background: #ede9fe; color: #7c3aed; }
+.pomo-input {
+  width: 52px; text-align: center;
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 5px 6px; font-size: 13px; font-weight: 600;
+  background: var(--input-bg); color: var(--text-primary); outline: none;
+}
+.pomo-input:focus { border-color: #7c3aed; }
+.pomo-unit { font-size: 12px; color: var(--text-muted); }

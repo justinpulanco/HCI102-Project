@@ -1,0 +1,13 @@
+.weekly-report-card { background: var(--card-bg); border-radius: 16px; padding: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.05); transition: background 0.3s; }
+.report-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 4px; }
+.weekly-report-card h2 { font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0 0 2px; }
+.report-sub { font-size: 11px; color: var(--text-muted); margin: 0; }
+.report-grade { font-size: 32px; font-weight: 900; border: 3px solid; border-radius: 12px; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.report-label-text { font-size: 13px; font-weight: 600; margin: 0 0 14px; }
+.report-metrics { display: flex; flex-direction: column; gap: 10px; }
+.report-metric-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.report-metric-label { font-size: 12px; color: var(--text-muted); }
+.report-metric-value { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.report-bar-wrap { background: var(--filter-bg); border-radius: 99px; height: 6px; overflow: hidden; }
+.report-bar-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+.report-overall { font-size: 12px; color: var(--text-muted); margin: 12px 0 0; text-align: right; }

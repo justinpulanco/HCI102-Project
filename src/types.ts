@@ -1,5 +1,11 @@
 export type Priority = 'high' | 'medium' | 'low'
 
+export interface Subtask {
+  id: number
+  title: string
+  done: boolean
+}
+
 export interface Task {
   id: number
   title: string
@@ -9,6 +15,9 @@ export interface Task {
   priority: Priority
   dueDate: string
   completedAt?: number
+  subtasks?: Subtask[]
+  notes?: string
+  createdAt?: number
 }
 
 export interface MyTask {
@@ -19,6 +28,9 @@ export interface MyTask {
   priority: Priority
   dueDate: string
   completedAt?: number
+  subtasks?: Subtask[]
+  notes?: string
+  createdAt?: number
 }
 
 export interface Course {
@@ -44,13 +56,16 @@ export interface Note {
   createdAt: number
 }
 
-export const COURSES: Course[] = [
+export const DEFAULT_COURSES: Course[] = [
   { id: 1, name: 'Mathematics', color: '#7c3aed', minutesSpent: 120, goal: 180 },
   { id: 2, name: 'Design', color: '#3b82f6', minutesSpent: 90, goal: 120 },
   { id: 3, name: 'Programming', color: '#10b981', minutesSpent: 200, goal: 240 },
   { id: 4, name: 'History', color: '#f59e0b', minutesSpent: 45, goal: 90 },
   { id: 5, name: 'Physics', color: '#ef4444', minutesSpent: 60, goal: 120 },
 ]
+
+// Keep for backward compat
+export const COURSES = DEFAULT_COURSES
 
 export const QUOTES = [
   "The secret of getting ahead is getting started.",
