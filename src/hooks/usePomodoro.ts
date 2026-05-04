@@ -57,6 +57,8 @@ export function usePomodoro() {
   const [sound, setSound] = useLocalStorage<SoundType>('sf-pomo-sound', 'chime')
   const [autoStart, setAutoStart] = useLocalStorage('sf-pomo-autostart', false)
   const [focusMode, setFocusMode] = useLocalStorage('sf-pomo-focus', false)
+  const [linkedTaskId, setLinkedTaskId] = useLocalStorage<number | null>('sf-pomo-task-id', null)
+  const [taskSessions, setTaskSessions] = useLocalStorage<Record<number, number>>('sf-pomo-task-sessions', {})
 
   const durations: Record<PomodoroMode, number> = {
     focus: settings.focus * 60,
@@ -93,8 +95,15 @@ export function usePomodoro() {
                 minutes: settings.focus,
                 date: new Date().toISOString().split('T')[0],
                 timestamp: Date.now(),
+                taskId: linkedTaskId || undefined,
               }
               setSessionLogs(logs => [log, ...logs].slice(0, 50))
+              
+              // Track sessions per task
+              if (linkedTaskId) {
+                setTaskSessions(s => ({ ...s, [linkedTaskId]: (s[linkedTaskId] || 0) + 1 }))
+              }
+              
               const next = NEXT_MODE[mode]
               const nextLabel = next === 'short' ? `${settings.short}m short break` : `${settings.long}m long break`
               setBanner(`🍅 Focus done! Starting ${nextLabel}...`)
@@ -146,5 +155,6 @@ export function usePomodoro() {
     minutes, seconds, progress, running, toggle, reset,
     mode, switchMode, sessions, subject, setSubject, durations,
     sound, setSound, autoStart, setAutoStart, focusMode, setFocusMode, banner,
+    linkedTaskId, setLinkedTaskId, taskSessions,
   }
 }

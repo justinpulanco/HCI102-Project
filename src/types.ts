@@ -48,6 +48,7 @@ export interface SessionLog {
   minutes: number
   date: string // ISO date
   timestamp: number
+  taskId?: number // Link to task
 }
 
 export interface Note {

@@ -1,6 +1,6 @@
 import { usePomodoro, PomodoroMode, SoundType } from '../hooks/usePomodoro'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import { DEFAULT_COURSES, Course } from '../types'
+import { DEFAULT_COURSES, Course, Task, MyTask } from '../types'
 import './PomodoroCard.css'
 
 const SIZE = 180
@@ -17,14 +17,40 @@ const SOUNDS: { value: SoundType; label: string }[] = [
   { value: 'none', label: '🔇 None' },
 ]
 
+const initialToday: Task[] = [
+  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06' },
+  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07' },
+  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04' },
+]
+const initialMy: MyTask[] = [
+  { id: 1, title: 'Creating Mobile App Design', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-08' },
+  { id: 2, title: 'Study Graphic Design', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-09' },
+  { id: 3, title: 'Create Animation For Apps', time: '2 Hours', done: false, priority: 'low', dueDate: '2026-05-10' },
+]
+
 export default function PomodoroCard() {
   const {
     minutes, seconds, progress, running, toggle, reset,
     mode, switchMode, sessions, subject, setSubject, durations,
     sound, setSound, autoStart, setAutoStart, focusMode, setFocusMode, banner,
+    linkedTaskId, setLinkedTaskId, taskSessions,
   } = usePomodoro()
   const [courses] = useLocalStorage<Course[]>('sf-courses', DEFAULT_COURSES)
+  const [todayTasks] = useLocalStorage<Task[]>('sf-tasks-today', initialToday)
+  const [myTasks] = useLocalStorage<MyTask[]>('sf-tasks-my', initialMy)
+  const [showTaskPicker, setShowTaskPicker] = useLocalStorage('sf-pomo-show-picker', false)
+  
   const dash = CIRCUMFERENCE * progress
+  
+  // Get all available tasks
+  const allTasks = [
+    ...todayTasks.map(t => ({ ...t, source: 'Today' as const })),
+    ...myTasks.map(t => ({ ...t, subject: '', source: 'My Tasks' as const })),
+  ].filter(t => !t.done)
+  
+  // Get linked task info
+  const linkedTask = allTasks.find(t => t.id === linkedTaskId)
+  const linkedTaskSessionCount = linkedTaskId ? (taskSessions[linkedTaskId] || 0) : 0
 
   return (
     <>
@@ -69,11 +95,50 @@ export default function PomodoroCard() {
 
         <div className="pomo-subject-row">
           <span className={`pomo-active-dot ${running ? 'live' : ''}`} />
-          <select className="pomo-subject-select" value={subject} onChange={e => setSubject(e.target.value)}>
-            <option value="General">General</option>
-            {courses.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
-          </select>
+          {linkedTask ? (
+            <div className="pomo-linked-task">
+              <span className="linked-task-title">{linkedTask.title}</span>
+              <span className="linked-task-sessions">{linkedTaskSessionCount} session{linkedTaskSessionCount !== 1 ? 's' : ''}</span>
+              <button className="unlink-btn" onClick={() => setLinkedTaskId(null)} title="Unlink task">✕</button>
+            </div>
+          ) : (
+            <select className="pomo-subject-select" value={subject} onChange={e => setSubject(e.target.value)}>
+              <option value="General">General</option>
+              {courses.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+            </select>
+          )}
         </div>
+
+        {!linkedTask && (
+          <button className="pomo-link-task-btn" onClick={() => setShowTaskPicker(!showTaskPicker)}>
+            {showTaskPicker ? '✕ Close' : '+ Link Task'}
+          </button>
+        )}
+
+        {showTaskPicker && !linkedTask && (
+          <div className="pomo-task-picker">
+            <div className="task-picker-header">Select a task to link</div>
+            <div className="task-picker-list">
+              {allTasks.length === 0 ? (
+                <div className="no-tasks-msg">No available tasks</div>
+              ) : (
+                allTasks.map(task => (
+                  <button
+                    key={`${task.source}-${task.id}`}
+                    className="task-picker-item"
+                    onClick={() => {
+                      setLinkedTaskId(task.id)
+                      setShowTaskPicker(false)
+                    }}
+                  >
+                    <span className="picker-task-title">{task.title}</span>
+                    <span className="picker-task-source">{task.source}</span>
+                  </button>
+                ))
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="pomodoro-controls">
           <button className="pomo-start" onClick={toggle}>{running ? 'Pause' : 'Start'}</button>

@@ -28,6 +28,7 @@ import SessionHistoryCard from './components/SessionHistoryCard'
 import QuickNotesCard from './components/QuickNotesCard'
 import HeatmapCard from './components/HeatmapCard'
 import SummaryBanner from './components/SummaryBanner'
+import NextBestTaskCard from './components/NextBestTaskCard'
 
 import './App.css'
 
@@ -38,6 +39,7 @@ function Dashboard({ search, onToast: _onToast }: { search: string; onToast: (ms
         <SummaryBanner />
       </div>
       <div className="col-left">
+        <NextBestTaskCard />
         <TaskTodayCard search={search} />
         <MentorsChart />
         <HeatmapCard />
