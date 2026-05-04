@@ -1,15 +1,8 @@
 import { useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useAuth } from '../hooks/useAuth'
 import { Task, Priority, Subtask } from '../types'
 import './TasksPage.css'
-
-const initial: Task[] = [
-  { id: 1, title: 'UI/UX Project Research', subject: 'Design', time: '10:00', done: false, priority: 'high', dueDate: '2026-05-06', createdAt: Date.now() - 5000, subtasks: [], notes: '' },
-  { id: 2, title: 'Design Figma Prototype', subject: 'Design', time: '12:00', done: true, priority: 'high', dueDate: '2026-05-06', createdAt: Date.now() - 4000, subtasks: [], notes: '' },
-  { id: 3, title: 'Web Development', subject: 'Programming', time: '14:00', done: false, priority: 'medium', dueDate: '2026-05-07', createdAt: Date.now() - 3000, subtasks: [], notes: '' },
-  { id: 4, title: 'Read HCI Chapter 5', subject: 'Courses', time: '16:00', done: true, priority: 'low', dueDate: '2026-05-07', createdAt: Date.now() - 2000, subtasks: [], notes: '' },
-  { id: 5, title: 'Prepare Presentation', subject: 'Assignments', time: '18:00', done: false, priority: 'medium', dueDate: '2026-05-08', createdAt: Date.now() - 1000, subtasks: [], notes: '' },
-]
 
 type Filter = 'All' | 'Pending' | 'Completed'
 type SortKey = 'dueDate' | 'priority' | 'createdAt'
@@ -18,7 +11,11 @@ const PRIORITY_COLORS: Record<Priority, string> = { high: '#ef4444', medium: '#f
 const PRIORITY_ORDER: Record<Priority, number> = { high: 0, medium: 1, low: 2 }
 
 export default function TasksPage({ search = '', onToast }: { search?: string; onToast?: (msg: string) => void }) {
-  const [tasks, setTasks] = useLocalStorage<Task[]>('sf-tasks-all', initial)
+  const { currentUser } = useAuth()
+  const userId = currentUser?.id || 'guest'
+  const userTasksKey = `sf-tasks-${userId}`
+  
+  const [tasks, setTasks] = useLocalStorage<Task[]>(userTasksKey, [])
   const [filter, setFilter] = useState<Filter>('All')
   const [sort, setSort] = useState<SortKey>('createdAt')
   const [showModal, setShowModal] = useState(false)
@@ -65,7 +62,7 @@ export default function TasksPage({ search = '', onToast }: { search?: string; o
     if (editId !== null) {
       setTasks(t => t.map(task => task.id === editId ? { ...task, ...form } : task))
     } else {
-      setTasks(t => [...t, { id: Date.now(), ...form, done: false, createdAt: Date.now(), subtasks: [] }])
+      setTasks(t => [...t, { id: Date.now(), ...form, done: false, createdAt: Date.now(), subtasks: [], type: 'personal' }])
       onToast?.('Task added!')
     }
     setShowModal(false)

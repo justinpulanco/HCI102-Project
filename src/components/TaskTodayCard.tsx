@@ -1,13 +1,8 @@
 import { useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useAuth } from '../hooks/useAuth'
 import { Task, Priority } from '../types'
 import './TaskCard.css'
-
-const initial: Task[] = [
-  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06' },
-  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07' },
-  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04' },
-]
 
 const PRIORITY_COLORS: Record<Priority, string> = {
   high: '#ef4444',
@@ -16,7 +11,11 @@ const PRIORITY_COLORS: Record<Priority, string> = {
 }
 
 export default function TaskTodayCard({ search }: { search?: string }) {
-  const [tasks, setTasks] = useLocalStorage<Task[]>('sf-tasks-today', initial)
+  const { currentUser } = useAuth()
+  const userId = currentUser?.id || 'guest'
+  const userTasksKey = `sf-tasks-${userId}`
+  
+  const [tasks, setTasks] = useLocalStorage<Task[]>(userTasksKey, [])
   const [adding, setAdding] = useState(false)
   const [filter, setFilter] = useState<Priority | 'all'>('all')
   const [form, setForm] = useState({ title: '', subject: '', time: '', priority: 'medium' as Priority, dueDate: '' })
@@ -32,7 +31,7 @@ export default function TaskTodayCard({ search }: { search?: string }) {
 
   const add = () => {
     if (!form.title.trim()) return
-    setTasks(t => [...t, { id: Date.now(), ...form, done: false }])
+    setTasks(t => [...t, { id: Date.now(), ...form, done: false, type: 'assignment' }])
     setForm({ title: '', subject: '', time: '', priority: 'medium', dueDate: '' })
     setAdding(false)
   }
