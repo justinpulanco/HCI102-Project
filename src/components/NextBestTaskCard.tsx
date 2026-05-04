@@ -1,16 +1,15 @@
+import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import { Task, MyTask, Priority } from '../types'
+import { Task, Priority } from '../types'
 import './NextBestTaskCard.css'
 
-const initialToday: Task[] = [
-  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06' },
-  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07' },
-  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04' },
-]
-const initialMy: MyTask[] = [
-  { id: 1, title: 'Creating Mobile App Design', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-08' },
-  { id: 2, title: 'Study Graphic Design', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-09' },
-  { id: 3, title: 'Create Animation For Apps', time: '2 Hours', done: false, priority: 'low', dueDate: '2026-05-10' },
+const initial: Task[] = [
+  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06', type: 'assignment' },
+  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07', type: 'assignment' },
+  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04', type: 'assignment' },
+  { id: 4, title: 'Creating Mobile App Design', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-08', type: 'personal', subject: '' },
+  { id: 5, title: 'Study Graphic Design', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-09', type: 'personal', subject: '' },
+  { id: 6, title: 'Create Animation For Apps', time: '2 Hours', done: false, priority: 'low', dueDate: '2026-05-10', type: 'personal', subject: '' },
 ]
 
 const PRIORITY_COLORS: Record<Priority, string> = {
@@ -46,23 +45,25 @@ function getTimeLeft(dueDate: string): { text: string; urgency: 'overdue' | 'urg
 }
 
 export default function NextBestTaskCard() {
-  const [todayTasks] = useLocalStorage<Task[]>('sf-tasks-today', initialToday)
-  const [myTasks] = useLocalStorage<MyTask[]>('sf-tasks-my', initialMy)
+  const navigate = useNavigate()
+  const [tasks] = useLocalStorage<Task[]>('sf-tasks', initial)
+  const [, setLinkedTaskId] = useLocalStorage<number | null>('sf-pomo-task-id', null)
 
-  // Combine all tasks and find the best one
-  const allTasks = [
-    ...todayTasks.map(t => ({ ...t, source: 'Today' as const })),
-    ...myTasks.map(t => ({ ...t, subject: '', source: 'My Tasks' as const })),
-  ]
+  // Find the best task: sort by priority first, then by due date
+  const nextTask = tasks
     .filter(t => !t.done && t.dueDate)
     .sort((a, b) => {
-      // Sort by: priority first, then by due date
       const priorityDiff = PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority]
       if (priorityDiff !== 0) return priorityDiff
       return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
-    })
+    })[0]
 
-  const nextTask = allTasks[0]
+  const handleStartTask = () => {
+    if (nextTask) {
+      setLinkedTaskId(nextTask.id)
+      navigate('/focus')
+    }
+  }
 
   if (!nextTask) {
     return (
@@ -86,7 +87,7 @@ export default function NextBestTaskCard() {
         <div className="task-header">
           <span className="priority-dot" style={{ background: PRIORITY_COLORS[nextTask.priority] }} />
           <div className="task-meta">
-            <span className="task-source">{nextTask.source}</span>
+            <span className="task-source">{nextTask.type === 'assignment' ? '📚 Assignment' : '📌 Personal'}</span>
             {nextTask.subject && <span className="task-subject">{nextTask.subject}</span>}
           </div>
         </div>
@@ -104,7 +105,7 @@ export default function NextBestTaskCard() {
           </div>
         </div>
 
-        <button className="start-task-btn">Start Task</button>
+        <button className="start-task-btn" onClick={handleStartTask}>Start Task</button>
       </div>
     </div>
   )

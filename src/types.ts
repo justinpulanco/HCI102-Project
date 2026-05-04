@@ -1,4 +1,5 @@
 export type Priority = 'high' | 'medium' | 'low'
+export type TaskType = 'assignment' | 'personal'
 
 export interface Subtask {
   id: number
@@ -14,19 +15,7 @@ export interface Task {
   done: boolean
   priority: Priority
   dueDate: string
-  completedAt?: number
-  subtasks?: Subtask[]
-  notes?: string
-  createdAt?: number
-}
-
-export interface MyTask {
-  id: number
-  title: string
-  time: string
-  done: boolean
-  priority: Priority
-  dueDate: string
+  type: TaskType
   completedAt?: number
   subtasks?: Subtask[]
   notes?: string

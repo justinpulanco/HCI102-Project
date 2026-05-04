@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 import './Sidebar.css'
 
 const navItems = [
@@ -11,6 +12,9 @@ const navItems = [
 
 export default function Sidebar() {
   const navigate = useNavigate()
+  const { currentUser, isGuest } = useAuth()
+
+  const userName = isGuest ? 'Guest' : (currentUser?.name || 'User')
 
   return (
     <aside className="sidebar">
@@ -26,8 +30,8 @@ export default function Sidebar() {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <div className="profile-info">
-          <span className="profile-name">David Max</span>
-          <span className="profile-role">Student</span>
+          <span className="profile-name">{userName}</span>
+          <span className="profile-role">{isGuest ? 'Guest' : 'Student'}</span>
         </div>
       </div>
 

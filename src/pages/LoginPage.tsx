@@ -1,19 +1,58 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 import './LoginPage.css'
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const { signup, login, loginAsGuest } = useAuth()
+  
+  const [mode, setMode] = useState<'login' | 'signup'>('login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [remember, setRemember] = useState(false)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const [forgotOpen, setForgotOpen] = useState(false)
   const [forgotEmail, setForgotEmail] = useState('')
   const [forgotSent, setForgotSent] = useState(false)
 
-  const handleLogin = (e: React.FormEvent) => {
+  const clearAllData = () => {
+    if (window.confirm('This will clear all data. Are you sure?')) {
+      localStorage.clear()
+      window.location.reload()
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
+    setLoading(true)
+
+    try {
+      let result
+      if (mode === 'signup') {
+        result = signup(email, password, name)
+      } else {
+        result = login(email, password)
+      }
+
+      if (result.success) {
+        navigate('/dashboard')
+      } else {
+        setError(result.error || 'An error occurred')
+      }
+    } catch (err) {
+      setError('An unexpected error occurred')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleGuest = () => {
+    loginAsGuest()
     navigate('/dashboard')
   }
 
@@ -53,14 +92,28 @@ export default function LoginPage() {
           </svg>
         </div>
         <p className="login-footer">© 2024 StudyFlow. All rights reserved.</p>
+        <button className="clear-data-btn" onClick={clearAllData} title="Clear all data and start fresh">
+          🗑️ Clear Data
+        </button>
       </div>
 
       <div className="login-right">
         <div className="login-card">
-          <h2>Welcome Back!</h2>
-          <p className="login-sub">Login to continue your productivity journey</p>
+          <h2>{mode === 'login' ? 'Welcome Back!' : 'Create Account'}</h2>
+          <p className="login-sub">{mode === 'login' ? 'Login to continue your productivity journey' : 'Join StudyFlow and start studying smarter'}</p>
 
-          <form className="login-form" onSubmit={handleLogin}>
+          {error && <div className="login-error">{error}</div>}
+
+          <form className="login-form" onSubmit={handleSubmit}>
+            {mode === 'signup' && (
+              <div className="login-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+                <input type="text" placeholder="Full name" value={name} onChange={e => setName(e.target.value)} required={mode === 'signup'} />
+              </div>
+            )}
+
             <div className="login-field">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -83,22 +136,35 @@ export default function LoginPage() {
               </button>
             </div>
 
-            <div className="login-options">
-              <label className="remember-me">
-                <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} />
-                Remember me
-              </label>
-              <button type="button" className="forgot-link" onClick={() => { setForgotOpen(true); setForgotSent(false); setForgotEmail('') }}>
-                Forgot Password?
-              </button>
-            </div>
+            {mode === 'login' && (
+              <div className="login-options">
+                <label className="remember-me">
+                  <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} />
+                  Remember me
+                </label>
+                <button type="button" className="forgot-link" onClick={() => { setForgotOpen(true); setForgotSent(false); setForgotEmail('') }}>
+                  Forgot Password?
+                </button>
+              </div>
+            )}
 
-            <button type="submit" className="login-btn">Login</button>
+            <button type="submit" className="login-btn" disabled={loading}>
+              {loading ? 'Loading...' : mode === 'login' ? 'Login' : 'Create Account'}
+            </button>
           </form>
 
           <div className="login-divider"><span>or</span></div>
 
-          <button className="guest-btn" onClick={() => navigate('/dashboard')}>
+          <div className="login-mode-switch">
+            <p className="mode-text">
+              {mode === 'login' ? "Don't have an account? " : 'Already have an account? '}
+              <button type="button" className="mode-link" onClick={() => { setMode(mode === 'login' ? 'signup' : 'login'); setError(''); }}>
+                {mode === 'login' ? 'Sign up' : 'Log in'}
+              </button>
+            </p>
+          </div>
+
+          <button className="guest-btn" onClick={handleGuest}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
             </svg>

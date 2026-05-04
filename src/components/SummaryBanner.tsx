@@ -1,5 +1,6 @@
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import { Task, MyTask } from '../types'
+import { useAuth } from '../hooks/useAuth'
+import { Task } from '../types'
 import './SummaryBanner.css'
 
 function getGreeting() {
@@ -10,14 +11,14 @@ function getGreeting() {
 }
 
 export default function SummaryBanner() {
-  const [todayTasks] = useLocalStorage<Task[]>('sf-tasks-today', [])
-  const [myTasks] = useLocalStorage<MyTask[]>('sf-tasks-my', [])
+  const { currentUser, isGuest } = useAuth()
+  const [tasks] = useLocalStorage<Task[]>('sf-tasks', [])
   const [sessions] = useLocalStorage('sf-sessions', 0)
 
+  const userName = isGuest ? 'Guest' : (currentUser?.name || 'User')
   const today = new Date().toISOString().split('T')[0]
-  const allTasks = [...todayTasks, ...myTasks]
-  const dueTodayCount = allTasks.filter(t => !t.done && t.dueDate === today).length
-  const completedToday = allTasks.filter(t => t.done && t.completedAt && new Date(t.completedAt).toISOString().split('T')[0] === today).length
+  const dueTodayCount = tasks.filter(t => !t.done && t.dueDate === today).length
+  const completedToday = tasks.filter(t => t.done && t.completedAt && new Date(t.completedAt).toISOString().split('T')[0] === today).length
 
   const { text, emoji } = getGreeting()
 
@@ -26,7 +27,7 @@ export default function SummaryBanner() {
       <div className="summary-banner-left">
         <span className="summary-greeting-emoji">{emoji}</span>
         <div>
-          <h2>{text}, David Max!</h2>
+          <h2>{text}, {userName}!</h2>
           <p>
             {dueTodayCount > 0
               ? `You have ${dueTodayCount} task${dueTodayCount > 1 ? 's' : ''} due today`

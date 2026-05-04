@@ -1,6 +1,6 @@
 import { usePomodoro, PomodoroMode, SoundType } from '../hooks/usePomodoro'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import { DEFAULT_COURSES, Course, Task, MyTask } from '../types'
+import { DEFAULT_COURSES, Course, Task } from '../types'
 import './PomodoroCard.css'
 
 const SIZE = 180
@@ -17,15 +17,13 @@ const SOUNDS: { value: SoundType; label: string }[] = [
   { value: 'none', label: '🔇 None' },
 ]
 
-const initialToday: Task[] = [
-  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06' },
-  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07' },
-  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04' },
-]
-const initialMy: MyTask[] = [
-  { id: 1, title: 'Creating Mobile App Design', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-08' },
-  { id: 2, title: 'Study Graphic Design', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-09' },
-  { id: 3, title: 'Create Animation For Apps', time: '2 Hours', done: false, priority: 'low', dueDate: '2026-05-10' },
+const initial: Task[] = [
+  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06', type: 'assignment' },
+  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07', type: 'assignment' },
+  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04', type: 'assignment' },
+  { id: 4, title: 'Creating Mobile App Design', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-08', type: 'personal', subject: '' },
+  { id: 5, title: 'Study Graphic Design', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-09', type: 'personal', subject: '' },
+  { id: 6, title: 'Create Animation For Apps', time: '2 Hours', done: false, priority: 'low', dueDate: '2026-05-10', type: 'personal', subject: '' },
 ]
 
 export default function PomodoroCard() {
@@ -36,17 +34,13 @@ export default function PomodoroCard() {
     linkedTaskId, setLinkedTaskId, taskSessions,
   } = usePomodoro()
   const [courses] = useLocalStorage<Course[]>('sf-courses', DEFAULT_COURSES)
-  const [todayTasks] = useLocalStorage<Task[]>('sf-tasks-today', initialToday)
-  const [myTasks] = useLocalStorage<MyTask[]>('sf-tasks-my', initialMy)
+  const [tasks] = useLocalStorage<Task[]>('sf-tasks', initial)
   const [showTaskPicker, setShowTaskPicker] = useLocalStorage('sf-pomo-show-picker', false)
   
   const dash = CIRCUMFERENCE * progress
   
   // Get all available tasks
-  const allTasks = [
-    ...todayTasks.map(t => ({ ...t, source: 'Today' as const })),
-    ...myTasks.map(t => ({ ...t, subject: '', source: 'My Tasks' as const })),
-  ].filter(t => !t.done)
+  const allTasks = tasks.filter(t => !t.done)
   
   // Get linked task info
   const linkedTask = allTasks.find(t => t.id === linkedTaskId)
@@ -124,7 +118,7 @@ export default function PomodoroCard() {
               ) : (
                 allTasks.map(task => (
                   <button
-                    key={`${task.source}-${task.id}`}
+                    key={task.id}
                     className="task-picker-item"
                     onClick={() => {
                       setLinkedTaskId(task.id)
@@ -132,7 +126,7 @@ export default function PomodoroCard() {
                     }}
                   >
                     <span className="picker-task-title">{task.title}</span>
-                    <span className="picker-task-source">{task.source}</span>
+                    <span className="picker-task-source">{task.type === 'assignment' ? '📚 Assignment' : '📌 Personal'}</span>
                   </button>
                 ))
               )}

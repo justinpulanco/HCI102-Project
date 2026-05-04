@@ -1,22 +1,23 @@
 import { useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useAuth } from '../hooks/useAuth'
 import { Course } from '../types'
 import './OnboardingModal.css'
 
 const PRESET_COLORS = ['#7c3aed', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#ec4899']
 
 export default function OnboardingModal() {
+  const { currentUser, isGuest } = useAuth()
   const [done, setDone] = useLocalStorage('sf-onboarded', false)
   const [step, setStep] = useState(0)
-  const [name, setName] = useLocalStorage('sf-profile', { name: 'David Max', role: 'Student' })
-  const [nameInput, setNameInput] = useState(name.name)
+  const [nameInput, setNameInput] = useState(currentUser?.name || '')
   const [goalHours, setGoalHours] = useState(5)
   const [subjects, setSubjects] = useState<{ name: string; color: string }[]>([])
   const [subInput, setSubInput] = useState('')
   const [subColor, setSubColor] = useState('#7c3aed')
   const [, setCourses] = useLocalStorage<Course[]>('sf-courses', [])
 
-  if (done) return null
+  if (done || isGuest) return null
 
   const addSubject = () => {
     if (!subInput.trim() || subjects.length >= 6) return
@@ -25,7 +26,6 @@ export default function OnboardingModal() {
   }
 
   const finish = () => {
-    setName({ name: nameInput || 'Student', role: 'Student' })
     if (subjects.length > 0) {
       setCourses(subjects.map((s, i) => ({ id: i + 1, name: s.name, color: s.color, minutesSpent: 0, goal: goalHours * 60 })))
     }

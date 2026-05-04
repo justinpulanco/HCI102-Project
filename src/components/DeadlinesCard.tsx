@@ -1,5 +1,5 @@
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import { Task, MyTask } from '../types'
+import { Task } from '../types'
 import './DeadlinesCard.css'
 
 function getUrgencyInfo(dateStr: string): { text: string; urgency: 'overdue' | 'urgent' | 'soon' | 'later'; icon: string } {
@@ -24,24 +24,20 @@ function getUrgencyInfo(dateStr: string): { text: string; urgency: 'overdue' | '
   return { text: `Due in ${days}d`, urgency: 'later', icon: '🟢' }
 }
 
-const initialToday: Task[] = [
-  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06' },
-  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07' },
-  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04' },
-]
-const initialMy: MyTask[] = [
-  { id: 1, title: 'Creating Mobile App Design', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-08' },
-  { id: 2, title: 'Study Graphic Design', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-09' },
-  { id: 3, title: 'Create Animation For Apps', time: '2 Hours', done: false, priority: 'low', dueDate: '2026-05-10' },
+const initial: Task[] = [
+  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06', type: 'assignment' },
+  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07', type: 'assignment' },
+  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04', type: 'assignment' },
+  { id: 4, title: 'Creating Mobile App Design', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-08', type: 'personal', subject: '' },
+  { id: 5, title: 'Study Graphic Design', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-09', type: 'personal', subject: '' },
+  { id: 6, title: 'Create Animation For Apps', time: '2 Hours', done: false, priority: 'low', dueDate: '2026-05-10', type: 'personal', subject: '' },
 ]
 
 export default function DeadlinesCard() {
-  const [todayTasks] = useLocalStorage<Task[]>('sf-tasks-today', initialToday)
-  const [myTasks] = useLocalStorage<MyTask[]>('sf-tasks-my', initialMy)
+  const [tasks] = useLocalStorage<Task[]>('sf-tasks', initial)
 
   const all = [
-    ...todayTasks.map(t => ({ ...t, source: 'Today' })),
-    ...myTasks.map(t => ({ ...t, subject: '', source: 'My Tasks' })),
+    ...tasks
   ]
     .filter(t => !t.done && t.dueDate)
     .sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime())
@@ -55,12 +51,12 @@ export default function DeadlinesCard() {
         {all.map(task => {
           const urgency = getUrgencyInfo(task.dueDate)
           return (
-            <li key={`${task.source}-${task.id}`} className={`deadline-item urgency-${urgency.urgency}`}>
+            <li key={task.id} className={`deadline-item urgency-${urgency.urgency}`}>
               <div className="deadline-info">
                 <span className="urgency-icon">{urgency.icon}</span>
                 <div className="deadline-text">
                   <span className="deadline-title">{task.title}</span>
-                  <span className="deadline-source">{task.source}</span>
+                  <span className="deadline-source">{task.type === 'assignment' ? '📚 Assignment' : '📌 Personal'}</span>
                 </div>
               </div>
               <span className="deadline-badge">{urgency.text}</span>

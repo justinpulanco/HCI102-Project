@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
+import SplashScreen from './components/SplashScreen'
 import { useDarkMode } from './hooks/useDarkMode'
 import { useToast } from './hooks/useToast'
+import { useAuth } from './hooks/useAuth'
 import ToastContainer from './components/ToastContainer'
 import OnboardingModal from './components/OnboardingModal'
 
@@ -15,9 +17,8 @@ import ProgressPage from './pages/ProgressPage'
 import SettingsPage from './pages/SettingsPage'
 
 // Dashboard components
-import TaskTodayCard from './components/TaskTodayCard'
+import TasksCard from './components/TasksCard'
 import PomodoroCard from './components/PomodoroCard'
-import MyTaskCard from './components/MyTaskCard'
 import StatsCard from './components/StatsCard'
 import MentorsChart from './components/MentorsChart'
 import CoursesCard from './components/CoursesCard'
@@ -40,7 +41,7 @@ function Dashboard({ search, onToast: _onToast }: { search: string; onToast: (ms
       </div>
       <div className="col-left">
         <NextBestTaskCard />
-        <TaskTodayCard search={search} />
+        <TasksCard search={search} />
         <MentorsChart />
         <HeatmapCard />
       </div>
@@ -50,7 +51,6 @@ function Dashboard({ search, onToast: _onToast }: { search: string; onToast: (ms
         <StreakGoalsCard />
       </div>
       <div className="col-right">
-        <MyTaskCard search={search} />
         <WeeklyFocusCard />
         <CoursesCard />
       </div>
@@ -91,6 +91,22 @@ function AppLayout() {
 }
 
 export default function App() {
+  const { isLoggedIn } = useAuth()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate loading time (you can adjust this)
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1200)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (isLoading) {
+    return <SplashScreen />
+  }
+
   return (
     <BrowserRouter>
       <Routes>
