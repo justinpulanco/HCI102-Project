@@ -1,16 +1,8 @@
 import { useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useAuth } from '../hooks/useAuth'
 import { Task, Priority, TaskType } from '../types'
 import './TaskCard.css'
-
-const initial: Task[] = [
-  { id: 1, title: 'Creating Awesome Mobile Apps', subject: 'Assignments', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-06', type: 'assignment' },
-  { id: 2, title: 'Creating Perfect Website', subject: 'Homework', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-07', type: 'assignment' },
-  { id: 3, title: 'Download Docs for Assignments', subject: 'Homework', time: '2 Hours', done: true, priority: 'low', dueDate: '2026-05-04', type: 'assignment' },
-  { id: 4, title: 'Creating Mobile App Design', time: '1 Hour', done: false, priority: 'high', dueDate: '2026-05-08', type: 'personal', subject: '' },
-  { id: 5, title: 'Study Graphic Design', time: '2 Hours', done: false, priority: 'medium', dueDate: '2026-05-09', type: 'personal', subject: '' },
-  { id: 6, title: 'Create Animation For Apps', time: '2 Hours', done: false, priority: 'low', dueDate: '2026-05-10', type: 'personal', subject: '' },
-]
 
 const PRIORITY_COLORS: Record<Priority, string> = {
   high: '#ef4444',
@@ -24,12 +16,32 @@ const TYPE_LABELS: Record<TaskType, string> = {
 }
 
 export default function TasksCard({ search }: { search?: string }) {
-  const [tasks, setTasks] = useLocalStorage<Task[]>('sf-tasks', initial)
+  const { currentUser, isGuest } = useAuth()
+  const userId = currentUser?.id || 'guest'
+  const userTasksKey = `sf-tasks-${userId}`
+  
+  const [tasks, setTasks] = useLocalStorage<Task[]>(userTasksKey, [])
   const [adding, setAdding] = useState(false)
   const [filterType, setFilterType] = useState<TaskType | 'all'>('all')
   const [filterPriority, setFilterPriority] = useState<Priority | 'all'>('all')
   const [form, setForm] = useState({ title: '', subject: '', time: '', priority: 'medium' as Priority, dueDate: '', type: 'personal' as TaskType })
   const [justDone, setJustDone] = useState<number | null>(null)
+
+  // Show message for guests
+  if (isGuest) {
+    return (
+      <div className="card">
+        <div className="card-header">
+          <h2>Tasks</h2>
+        </div>
+        <div className="guest-message">
+          <p className="guest-icon">🔒</p>
+          <p className="guest-title">Tasks are for registered users</p>
+          <p className="guest-subtitle">Create an account to start managing your tasks and boost your productivity!</p>
+        </div>
+      </div>
+    )
+  }
 
   const toggle = (id: number) => {
     setJustDone(id)

@@ -91,7 +91,7 @@ export default function LoginPage() {
             <line x1="65" y1="158" x2="115" y2="158" stroke="#7c3aed" strokeWidth="2"/>
           </svg>
         </div>
-        <p className="login-footer">© 2024 StudyFlow. All rights reserved.</p>
+        <p className="login-footer">© 2026 StudyFlow. All rights reserved.</p>
         <button className="clear-data-btn" onClick={clearAllData} title="Clear all data and start fresh">
           🗑️ Clear Data
         </button>
