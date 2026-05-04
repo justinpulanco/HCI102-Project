@@ -1,0 +1,42 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Light theme (default) */
+:root, [data-theme="light"] {
+  --bg: #f7f6fb;
+  --card-bg: #ffffff;
+  --text-primary: #1a1a2e;
+  --text-secondary: #555;
+  --text-muted: #aaa;
+  --border: #f0eef5;
+  --filter-bg: #f3f4f6;
+  --task-hover: #faf9ff;
+  --input-bg: #ffffff;
+  --sidebar-bg: #ffffff;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg: #0f0f1a;
+  --card-bg: #1a1a2e;
+  --text-primary: #f1f0f5;
+  --text-secondary: #c4c0d0;
+  --text-muted: #6b6880;
+  --border: #2a2840;
+  --filter-bg: #252338;
+  --task-hover: #1f1d30;
+  --input-bg: #252338;
+  --sidebar-bg: #1a1a2e;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  transition: background 0.3s, color 0.3s;
+}

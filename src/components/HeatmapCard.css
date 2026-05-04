@@ -1,0 +1,22 @@
+.heatmap-card { background: var(--card-bg); border-radius: 16px; padding: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.05); transition: background 0.3s; }
+
+.heatmap-legend { display: flex; align-items: center; gap: 3px; }
+
+.heatmap-grid { display: flex; gap: 3px; margin-top: 8px; }
+
+.heatmap-week { display: flex; flex-direction: column; gap: 3px; }
+
+.heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--filter-bg);
+  transition: background 0.2s;
+}
+.heatmap-cell:hover { opacity: 0.8; cursor: default; }
+
+.heatmap-cell.level-0 { background: var(--filter-bg); }
+.heatmap-cell.level-1 { background: #ddd6fe; }
+.heatmap-cell.level-2 { background: #a78bfa; }
+.heatmap-cell.level-3 { background: #7c3aed; }
+.heatmap-cell.level-4 { background: #5b21b6; }

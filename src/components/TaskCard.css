@@ -1,0 +1,208 @@
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  transition: background 0.3s;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.card-header h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.add-btn {
+  background: none;
+  color: #7c3aed;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+.add-btn:hover { opacity: 0.75; }
+
+.filter-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--filter-bg);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 99px;
+  padding: 3px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.filter-btn:hover { background: #ede9fe; color: #7c3aed; }
+.filter-btn.active { background: #7c3aed; color: #fff; font-weight: 600; }
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px;
+  border-radius: 8px;
+  transition: background 0.15s, transform 0.15s;
+  position: relative;
+}
+.task-item:hover { background: var(--task-hover); }
+.task-item:hover .delete-btn { opacity: 1; }
+
+/* completion pop animation */
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+.task-item.pop { animation: pop 0.4s ease; }
+
+.check-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: border-color 0.2s, background 0.2s;
+}
+.check-btn:hover { border-color: #7c3aed; }
+.task-item.done .check-btn { background: #7c3aed; border-color: #7c3aed; }
+
+.check-icon { display: none; }
+.task-item.done .check-icon { display: block; }
+
+.priority-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.task-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.task-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+.task-item.done .task-title { text-decoration: line-through; color: var(--text-muted); }
+
+.task-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.due-date { font-size: 11px; }
+.due-date.overdue { color: #ef4444; font-weight: 600; }
+
+.task-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding-right: 4px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ddd;
+  font-size: 11px;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+.delete-btn:hover { color: #ef4444; }
+
+.empty-state {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 12px 0;
+}
+
+.add-form {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-form input,
+.add-form select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  outline: none;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+.add-form input:focus,
+.add-form select:focus { border-color: #7c3aed; }
+
+.form-actions { display: flex; gap: 8px; }
+
+.save-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.save-btn:hover { background: #6d28d9; }
+
+.cancel-btn {
+  background: var(--filter-bg);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.cancel-btn:hover { background: var(--border); }

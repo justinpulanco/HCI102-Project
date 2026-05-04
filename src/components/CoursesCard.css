@@ -1,0 +1,32 @@
+.courses-card { background: var(--card-bg); border-radius: 16px; padding: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.05); transition: background 0.3s; }
+
+.courses-list { display: flex; flex-direction: column; gap: 12px; }
+
+.course-item { display: flex; flex-direction: column; gap: 6px; }
+
+.course-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.course-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+.course-progress-wrap { display: flex; align-items: center; gap: 8px; }
+
+.course-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--filter-bg);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.course-progress-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+
+.course-time { font-size: 11px; color: var(--text-muted); flex-shrink: 0; width: 28px; text-align: right; }

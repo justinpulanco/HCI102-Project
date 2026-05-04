@@ -1,0 +1,46 @@
+.deadlines-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  transition: background 0.3s;
+}
+
+.deadlines-card h2 { font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0 0 14px; }
+
+.no-deadlines { font-size: 13px; color: var(--text-muted); }
+
+.deadlines-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+
+.deadline-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--filter-bg);
+  transition: background 0.2s;
+}
+.deadline-item.overdue { background: #fef2f2; }
+.deadline-item.due-today { background: #fffbeb; }
+
+[data-theme="dark"] .deadline-item.overdue { background: #2d1515; }
+[data-theme="dark"] .deadline-item.due-today { background: #2d2510; }
+
+.deadline-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.deadline-title { font-size: 12px; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.deadline-source { font-size: 10px; color: var(--text-muted); }
+
+.deadline-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: #ede9fe;
+  color: #7c3aed;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.deadline-item.overdue .deadline-badge { background: #fee2e2; color: #ef4444; }
+.deadline-item.due-today .deadline-badge { background: #fef3c7; color: #d97706; }
