@@ -116,7 +116,16 @@ export default function TasksCard({ search }: { search?: string }) {
             <button className="delete-btn" onClick={() => remove(task.id)} aria-label="Delete task">✕</button>
           </li>
         ))}
-        {visible.length === 0 && <li className="empty-state">No tasks found</li>}
+        {tasks.length === 0 && (
+          <li className="empty-state-new">
+            <p className="empty-icon">📝</p>
+            <p className="empty-title">No tasks yet</p>
+            <p className="empty-subtitle">Click "+ Add" to create your first task and start organizing your work!</p>
+          </li>
+        )}
+        {tasks.length > 0 && visible.length === 0 && (
+          <li className="empty-state">No tasks found</li>
+        )}
       </ul>
 
       {adding && (
