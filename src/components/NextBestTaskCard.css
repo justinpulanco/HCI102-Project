@@ -1,15 +1,14 @@
 .next-best-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px;
-  backdrop-filter: blur(10px);
 }
 
 .next-best-card h2 {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-muted);
   margin: 0 0 16px 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -18,7 +17,7 @@
 .no-tasks {
   text-align: center;
   padding: 40px 20px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
 }
 
 .no-tasks p {
@@ -37,8 +36,8 @@
   gap: 16px;
   padding: 16px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--filter-bg);
+  border: 1px solid var(--border);
   transition: all 0.3s ease;
 }
 
@@ -79,12 +78,12 @@
   display: flex;
   gap: 8px;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-muted);
 }
 
 .task-source {
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary);
 }
 
 .task-subject {
@@ -94,7 +93,7 @@
 .task-title {
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
   margin: 0;
   line-height: 1.4;
 }
@@ -113,11 +112,11 @@
 }
 
 .detail-label {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-muted);
 }
 
 .detail-value {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   font-weight: 500;
 }
 

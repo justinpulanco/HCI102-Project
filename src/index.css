@@ -9,14 +9,14 @@ body {
 
 /* Light theme (default) */
 :root, [data-theme="light"] {
-  --bg: #f7f6fb;
+  --bg: #f5f3fa;
   --card-bg: #ffffff;
-  --text-primary: #1a1a2e;
-  --text-secondary: #555;
-  --text-muted: #aaa;
-  --border: #f0eef5;
-  --filter-bg: #f3f4f6;
-  --task-hover: #faf9ff;
+  --text-primary: #0d0d1a;
+  --text-secondary: #404050;
+  --text-muted: #888899;
+  --border: #e8e5f0;
+  --filter-bg: #f0ecf8;
+  --task-hover: #f8f5ff;
   --input-bg: #ffffff;
   --sidebar-bg: #ffffff;
 }

@@ -86,8 +86,8 @@
   text-decoration: none;
 }
 
-.nav-item:hover { background: #f5f3ff; color: #7c3aed; }
-.nav-item.active { background: #f0ebff; color: #7c3aed; font-weight: 600; }
+.nav-item:hover { background: var(--filter-bg); color: #7c3aed; }
+.nav-item.active { background: var(--filter-bg); color: #7c3aed; font-weight: 600; }
 .nav-icon {
   display: flex;
   align-items: center;
