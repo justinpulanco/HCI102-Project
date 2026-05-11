@@ -9,7 +9,7 @@ body {
 
 /* Light theme (default) */
 :root, [data-theme="light"] {
-  --bg: #f5f3fa;
+  --bg: #f8f7fc;
   --card-bg: #ffffff;
   --text-primary: #0d0d1a;
   --text-secondary: #404050;

@@ -1,63 +1,67 @@
 .stats-card {
-  background: var(--card-bg);
+  background: #ffffff;
   border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: background 0.3s;
 }
 
 .stats-card h2 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 8px;
+  color: #0d0d1a;
+  margin: 0 0 12px;
 }
 
 .stats-count {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 800;
-  color: #7c3aed;
+  color: #4f46e5;
   line-height: 1;
 }
 
 .stats-label {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin: 4px 0 16px;
+  font-size: 13px;
+  color: #999;
+  margin: 6px 0 18px;
 }
 
 .stats-progress-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .stats-progress-text {
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 13px;
+  color: #999;
 }
 
 .stats-pct {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #0d0d1a;
 }
 
 .progress-bar-wrap {
-  background: var(--filter-bg);
+  background: #f0ecf8;
   border-radius: 99px;
-  height: 8px;
+  height: 10px;
   overflow: hidden;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
   border-radius: 99px;
 }
 
-.stats-divider { height: 1px; background: var(--border); margin: 12px 0; }
+.stats-divider { 
+  height: 1px; 
+  background: #e8e5f0; 
+  margin: 14px 0; 
+}
 
 .progress-bar-fill.study {
   background: linear-gradient(90deg, #3b82f6, #06b6d4);

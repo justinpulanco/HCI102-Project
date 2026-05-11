@@ -1,89 +1,90 @@
 .next-best-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e8e5f0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .next-best-card h2 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin: 0 0 16px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #999;
+  margin: 0 0 18px 0;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .no-tasks {
   text-align: center;
-  padding: 40px 20px;
-  color: var(--text-muted);
+  padding: 48px 20px;
+  color: #999;
 }
 
 .no-tasks p {
-  font-size: 24px;
-  margin: 0 0 8px 0;
+  font-size: 28px;
+  margin: 0 0 10px 0;
 }
 
 .no-tasks span {
-  font-size: 13px;
+  font-size: 14px;
   display: block;
 }
 
 .next-task-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 8px;
-  background: var(--filter-bg);
-  border: 1px solid var(--border);
+  gap: 18px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #f0ecf8;
+  border: 1px solid #e8e5f0;
   transition: all 0.3s ease;
 }
 
 .next-task-content.overdue {
   background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.2);
 }
 
 .next-task-content.urgent {
   background: rgba(239, 68, 68, 0.08);
-  border-color: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.15);
 }
 
 .next-task-content.soon {
   background: rgba(245, 158, 11, 0.08);
-  border-color: rgba(245, 158, 11, 0.25);
+  border-color: rgba(245, 158, 11, 0.15);
 }
 
 .next-task-content.later {
   background: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.15);
 }
 
 .task-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .priority-dot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 .task-meta {
   display: flex;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--text-muted);
+  gap: 10px;
+  font-size: 13px;
+  color: #999;
 }
 
 .task-source {
   font-weight: 600;
-  color: var(--text-secondary);
+  color: #666;
 }
 
 .task-subject {
@@ -91,9 +92,9 @@
 }
 
 .task-title {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #0d0d1a;
   margin: 0;
   line-height: 1.4;
 }
@@ -101,31 +102,31 @@
 .task-details {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .detail-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .detail-label {
-  color: var(--text-muted);
+  color: #999;
 }
 
 .detail-value {
-  color: var(--text-primary);
+  color: #0d0d1a;
   font-weight: 500;
 }
 
 .detail-item.urgency-overdue .detail-value {
-  color: #ef4444;
+  color: #dc2626;
 }
 
 .detail-item.urgency-urgent .detail-value {
-  color: #ef4444;
+  color: #dc2626;
 }
 
 .detail-item.urgency-soon .detail-value {
@@ -137,12 +138,12 @@
 }
 
 .start-task-btn {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-size: 13px;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -152,7 +153,7 @@
 
 .start-task-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
 }
 
 .start-task-btn:active {

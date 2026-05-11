@@ -34,8 +34,8 @@ body {
   display: grid;
   grid-template-columns: 1fr 280px 1fr;
   grid-template-rows: auto;
-  gap: 20px;
-  padding: 24px 28px;
+  gap: 24px;
+  padding: 28px 32px;
   align-items: start;
 }
 
@@ -46,14 +46,14 @@ body {
 .col-left, .col-center, .col-right {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .col-bottom {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  gap: 24px;
 }
 
 .page-content {

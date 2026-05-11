@@ -1,13 +1,13 @@
 .pomodoro-card {
-  background: linear-gradient(145deg, #7c3aed 0%, #5b6ef5 60%, #3b82f6 100%);
+  background: linear-gradient(135deg, #4f46e5 0%, #4f46e5 50%, #3b82f6 100%);
   border-radius: 16px;
-  padding: 20px;
+  padding: 28px 24px;
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  box-shadow: 0 4px 24px rgba(124, 58, 237, 0.4);
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.3);
 }
 
 .pomo-top {
@@ -18,39 +18,47 @@
 }
 
 .pomo-label {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .pomo-sessions {
-  font-size: 12px;
+  font-size: 13px;
   background: rgba(255,255,255,0.2);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 99px;
 }
 
 .pomo-modes {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
 .pomo-mode-btn {
   background: rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.85);
   border: none;
-  border-radius: 8px;
-  padding: 5px 14px;
-  font-size: 12px;
+  border-radius: 10px;
+  padding: 7px 16px;
+  font-size: 13px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.2s;
+  font-weight: 500;
 }
-.pomo-mode-btn:hover { background: rgba(255,255,255,0.25); color: #fff; }
-.pomo-mode-btn.active { background: rgba(255,255,255,0.3); color: #fff; font-weight: 700; }
+.pomo-mode-btn:hover { 
+  background: rgba(255,255,255,0.25); 
+  color: #fff; 
+}
+.pomo-mode-btn.active { 
+  background: rgba(255,255,255,0.3); 
+  color: #fff; 
+  font-weight: 700; 
+}
 
 .pomodoro-circle-wrap {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +66,7 @@
 
 .pomodoro-time {
   position: absolute;
-  font-size: 34px;
+  font-size: 48px;
   font-weight: 700;
   letter-spacing: 2px;
 }
@@ -66,12 +74,12 @@
 .pomo-subject-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .pomo-active-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(255,255,255,0.3);
   flex-shrink: 0;
@@ -79,7 +87,7 @@
 }
 .pomo-active-dot.live {
   background: #4ade80;
-  box-shadow: 0 0 6px #4ade80;
+  box-shadow: 0 0 8px #4ade80;
   animation: pulse-dot 1.2s infinite;
 }
 @keyframes pulse-dot {
@@ -90,14 +98,17 @@
 .pomo-subject-select {
   background: rgba(255,255,255,0.2);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #fff;
-  font-size: 12px;
-  padding: 4px 10px;
+  font-size: 13px;
+  padding: 6px 12px;
   cursor: pointer;
   outline: none;
 }
-.pomo-subject-select option { color: #1a1a2e; background: #fff; }
+.pomo-subject-select option { 
+  color: #0d0d1a; 
+  background: #fff; 
+}
 
 .pomo-mode-label {
   font-size: 12px;

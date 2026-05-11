@@ -1,31 +1,52 @@
 .streak-card {
-  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
   border-radius: 16px;
-  padding: 20px;
+  padding: 24px;
   color: #fff;
-  box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.3);
 }
 
 .streak-row {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 14px;
+  gap: 18px;
+  margin-bottom: 16px;
 }
 
-.streak-block { display: flex; align-items: center; gap: 10px; flex: 1; }
-.streak-fire { font-size: 22px; }
-.streak-num { font-size: 26px; font-weight: 800; line-height: 1; }
-.streak-of { font-size: 14px; font-weight: 400; opacity: 0.7; }
-.streak-label { font-size: 11px; opacity: 0.75; margin-top: 2px; }
-.streak-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.25); }
+.streak-block { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  flex: 1; 
+}
+.streak-fire { font-size: 24px; }
+.streak-num { 
+  font-size: 28px; 
+  font-weight: 800; 
+  line-height: 1; 
+}
+.streak-of { 
+  font-size: 15px; 
+  font-weight: 400; 
+  opacity: 0.8; 
+}
+.streak-label { 
+  font-size: 12px; 
+  opacity: 0.8; 
+  margin-top: 2px; 
+}
+.streak-divider { 
+  width: 1px; 
+  height: 44px; 
+  background: rgba(255,255,255,0.25); 
+}
 
 .goal-bar-wrap {
   background: rgba(255,255,255,0.2);
   border-radius: 99px;
-  height: 6px;
+  height: 8px;
   overflow: hidden;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .goal-bar-fill {
   height: 100%;
@@ -34,14 +55,18 @@
   transition: width 0.4s ease;
 }
 
-.goal-pct-label { font-size: 11px; opacity: 0.75; margin: 0 0 12px; }
+.goal-pct-label { 
+  font-size: 12px; 
+  opacity: 0.8; 
+  margin: 0 0 14px; 
+}
 
 .daily-quote {
-  font-size: 12px;
-  opacity: 0.85;
+  font-size: 13px;
+  opacity: 0.9;
   font-style: italic;
   line-height: 1.5;
   margin: 0;
   border-top: 1px solid rgba(255,255,255,0.2);
-  padding-top: 12px;
+  padding-top: 14px;
 }

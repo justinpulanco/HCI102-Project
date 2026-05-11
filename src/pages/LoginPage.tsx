@@ -65,11 +65,7 @@ export default function LoginPage() {
     <div className="login-page">
       <div className="login-left">
         <div className="login-brand">
-          <div className="login-logo-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
-          </div>
+          <img src="/download.png" alt="StudyFlow Logo" className="login-logo-img-direct" />
           <span className="login-brand-name">StudyFlow</span>
         </div>
         <div className="login-hero-text">
@@ -77,19 +73,7 @@ export default function LoginPage() {
           <p>Your personal study companion for better learning outcomes.</p>
         </div>
         <div className="login-illustration">
-          <div className="illus-circle illus-circle-1" />
-          <div className="illus-circle illus-circle-2" />
-          <svg className="illus-student" viewBox="0 0 200 200" fill="none">
-            <circle cx="100" cy="60" r="30" fill="#c4b5fd"/>
-            <rect x="60" y="95" width="80" height="70" rx="20" fill="#7c3aed"/>
-            <rect x="30" y="110" width="40" height="12" rx="6" fill="#a78bfa"/>
-            <rect x="130" y="110" width="40" height="12" rx="6" fill="#a78bfa"/>
-            <rect x="70" y="165" width="20" height="35" rx="8" fill="#6d28d9"/>
-            <rect x="110" y="165" width="20" height="35" rx="8" fill="#6d28d9"/>
-            <rect x="50" y="130" width="100" height="60" rx="8" fill="#ede9fe"/>
-            <line x1="65" y1="148" x2="135" y2="148" stroke="#7c3aed" strokeWidth="2"/>
-            <line x1="65" y1="158" x2="115" y2="158" stroke="#7c3aed" strokeWidth="2"/>
-          </svg>
+          <img src="/girl-using-laptop-cute-cartoon-vector-illustrationaaa_1142-71876.png" alt="Girl studying" className="login-illustration-img" />
         </div>
         <p className="login-footer">© 2026 StudyFlow. All rights reserved.</p>
         <button className="clear-data-btn" onClick={clearAllData} title="Clear all data and start fresh">

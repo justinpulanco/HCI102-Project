@@ -1,23 +1,50 @@
 .focus-page { padding: 28px 32px; }
-.focus-page h1 { font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 0 0 24px; }
+.focus-page h1 { 
+  font-size: 28px; 
+  font-weight: 700; 
+  color: #0d0d1a; 
+  margin: 0 0 28px; 
+}
 
-.focus-layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: start; }
+.focus-layout { 
+  display: grid; 
+  grid-template-columns: 1fr 320px; 
+  gap: 28px; 
+  align-items: start; 
+}
 
-.focus-main { display: flex; flex-direction: column; gap: 16px; }
+.focus-main { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 24px; 
+}
 
 .focus-tip-card {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  background: var(--card-bg);
+  gap: 14px;
+  background: #ede9fe;
   border-radius: 14px;
-  padding: 16px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
-.focus-tip-icon { font-size: 22px; flex-shrink: 0; }
-.focus-tip-label { font-size: 11px; font-weight: 700; color: var(--text-muted); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-.focus-tip-text { font-size: 13px; color: var(--text-primary); margin: 0; line-height: 1.5; font-style: italic; }
+.focus-tip-icon { font-size: 24px; flex-shrink: 0; }
+.focus-tip-label { 
+  font-size: 12px; 
+  font-weight: 700; 
+  color: #999; 
+  margin: 0 0 4px; 
+  text-transform: uppercase; 
+  letter-spacing: 0.6px; 
+}
+.focus-tip-text { 
+  font-size: 14px; 
+  color: #0d0d1a; 
+  margin: 0; 
+  line-height: 1.5; 
+  font-style: italic; 
+}
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .focus-layout { grid-template-columns: 1fr; }
 }

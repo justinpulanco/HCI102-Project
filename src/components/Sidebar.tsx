@@ -19,9 +19,7 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="logo-box">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
+        <img src="/download.png" alt="StudyFlow Logo" className="logo-img-direct" />
         <span className="logo-text">StudyFlow</span>
       </div>
 

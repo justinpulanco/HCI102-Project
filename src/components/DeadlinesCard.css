@@ -1,36 +1,48 @@
 .deadlines-card {
-  background: var(--card-bg);
+  background: #ffffff;
   border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: background 0.3s;
 }
 
-.deadlines-card h2 { font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0 0 14px; }
+.deadlines-card h2 { 
+  font-size: 16px; 
+  font-weight: 700; 
+  color: #0d0d1a; 
+  margin: 0 0 16px; 
+}
 
-.no-deadlines { font-size: 13px; color: var(--text-muted); }
+.no-deadlines { font-size: 14px; color: #999; }
 
-.deadlines-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.deadlines-list { 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+}
 
 .deadline-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: var(--filter-bg);
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f0ecf8;
   transition: all 0.2s;
-  border-left: 3px solid transparent;
+  border-left: 4px solid transparent;
 }
 
 .deadline-item.urgency-overdue { 
   background: rgba(239, 68, 68, 0.1);
-  border-left-color: #ef4444;
+  border-left-color: #dc2626;
 }
 .deadline-item.urgency-urgent { 
   background: rgba(239, 68, 68, 0.08);
-  border-left-color: #ef4444;
+  border-left-color: #dc2626;
 }
 .deadline-item.urgency-soon { 
   background: rgba(245, 158, 11, 0.08);
@@ -49,13 +61,13 @@
 .deadline-info { 
   display: flex; 
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
   flex: 1;
 }
 
 .urgency-icon {
-  font-size: 16px;
+  font-size: 18px;
   flex-shrink: 0;
 }
 
@@ -67,38 +79,38 @@
 }
 
 .deadline-title { 
-  font-size: 12px; 
+  font-size: 13px; 
   font-weight: 500; 
-  color: var(--text-primary); 
+  color: #0d0d1a; 
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
 }
 
 .deadline-source { 
-  font-size: 10px; 
-  color: var(--text-muted); 
+  font-size: 11px; 
+  color: #999; 
 }
 
 .deadline-badge {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 5px 11px;
+  border-radius: 8px;
   background: #ede9fe;
-  color: #7c3aed;
+  color: #4f46e5;
   flex-shrink: 0;
   white-space: nowrap;
 }
 
 .deadline-item.urgency-overdue .deadline-badge { 
   background: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
+  color: #dc2626;
 }
 
 .deadline-item.urgency-urgent .deadline-badge { 
   background: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
+  color: #dc2626;
 }
 
 .deadline-item.urgency-soon .deadline-badge { 
