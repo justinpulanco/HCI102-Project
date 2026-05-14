@@ -11,6 +11,19 @@
   transition: background 0.3s;
 }
 
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 12px 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
 .sidebar-logo {
   display: flex;
   align-items: center;
@@ -94,6 +107,12 @@
   flex: 1;
 }
 
+@media (max-width: 768px) {
+  .sidebar-nav {
+    display: none;
+  }
+}
+
 .nav-item {
   display: flex;
   align-items: center;
@@ -133,4 +152,10 @@
   margin-top: auto;
   padding-top: 0;
   border-top: none;
+}
+
+@media (max-width: 768px) {
+  .logout-btn {
+    display: none;
+  }
 }
